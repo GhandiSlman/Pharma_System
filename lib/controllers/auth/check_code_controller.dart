@@ -2,29 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pharma_man/core/const/routes.dart';
-import 'package:http/http.dart' as http;
-import 'package:pharma_man/controllers/auth/login_controller.dart';
 import 'package:sizer/sizer.dart';
-import '../../core/const/api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpController extends GetxController {
-  late final TextEditingController name;
-  late final TextEditingController email;
+import '../../core/const/api.dart';
+import 'package:http/http.dart' as http;
+
+class CheckCodeController extends GetxController {
   late final TextEditingController password;
   late final TextEditingController conPassword;
+  late final TextEditingController code;
   RxBool isLoading = false.obs;
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
-  goToSignIn() {
-    Get.offNamed(AppRoute.login);
-  }
-
-  Future signUp(
-      String name, String email, String password, String conPass) async {
+  Future enterCode(String code, String password, String conPassword) async {
+    
     try {
       var formdata = formState.currentState;
       if (formdata!.validate()) {
@@ -33,38 +26,36 @@ class SignUpController extends GetxController {
         var isConnected = await InternetConnectionChecker().hasConnection;
 
         if (!isConnected) {
+        
           Get.snackbar(
             'No internet connection',
             'Please check your internet connection and try again.',
             backgroundColor: Color.fromARGB(255, 245, 113, 103),
             snackPosition: SnackPosition.BOTTOM,
           );
-          isLoading.value = false;
+            isLoading.value = false;
           return;
         }
         isLoading.value = true;
-        var response =
-            await http.post(Uri.parse('${Api}register'), body: <String, String>{
-          'name': name,
-          'email': email,
+        var response = await http
+            .post(Uri.parse('${Api}password/reset'), body: <String, String>{
+          'code': code,
           'password': password,
-          'password_confirmation': conPass,
+          'password_confirmation': conPassword,
         });
         print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
           Map responseBody = jsonDecode(response.body);
           isLoading.value = false;
-          getToken(responseBody['token']);
-          print('================${responseBody['token']}');
-          Get.offNamed(AppRoute.mainScreen);
-          // Get.snackbar('Success', 'Done',
-          //     padding: const EdgeInsets.all(10),
-          //     backgroundColor: Colors.green,
-          //     snackPosition: SnackPosition.TOP);
+          Get.offAllNamed(AppRoute.login);
+          Get.snackbar('Success', 'Reset password successfully',
+              padding:  EdgeInsets.all(2.h),
+              backgroundColor: Color.fromARGB(255, 153, 247, 156),
+              snackPosition: SnackPosition.TOP);
         } else {
           isLoading.value = false;
-          Get.snackbar('Error', 'Something went wrong',
-              padding: EdgeInsets.all(2.h),
+          Get.snackbar('Error', 'Wrong Code',
+             padding: EdgeInsets.all(2.h),
               backgroundColor: Color.fromARGB(255, 245, 113, 103),
               snackPosition: SnackPosition.BOTTOM);
         }
@@ -73,14 +64,8 @@ class SignUpController extends GetxController {
       print(e);
     }
   }
-
-  getToken(String token) async {
-    SharedPreferences sh = await SharedPreferences.getInstance();
-    await sh.setString('signup', token);
-  }
-
-  RxString passwordd = ''.obs;
-  RxString confirmPassword = ''.obs;
+  var passwordd = ''.obs;
+  var confirmPassword = ''.obs;
 
   void onPasswordChanged(String value) {
     passwordd.value = value;
@@ -90,20 +75,18 @@ class SignUpController extends GetxController {
     confirmPassword.value = value;
   }
 
-  String? validateConfirmPassword(String value) {
+  String? validateConfirmPassword() {
     if (passwordd.value != confirmPassword.value) {
-      return "Password dosn't not match";
+      return 'Passwords do not match';
     }
     return null;
   }
 
   @override
   void onInit() {
-    email = TextEditingController();
     password = TextEditingController();
-    name = TextEditingController();
     conPassword = TextEditingController();
-   // Get.put(LoginController());
+    code = TextEditingController();
     super.onInit();
   }
 }

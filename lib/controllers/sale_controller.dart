@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pharma_man/const/appcolor.dart';
-import 'package:pharma_man/screens/sale/customer2.dart';
-import 'package:pharma_man/screens/sale/customer3.dart';
-import 'package:pharma_man/screens/sale/customer4.dart';
+import 'package:pharma_man/core/const/appcolor.dart';
+import 'package:pharma_man/view/screens/customer2.dart';
+import 'package:pharma_man/view/screens/customer3.dart';
+import 'package:pharma_man/view/screens/customer4.dart';
 
-import '../screens/sale/customer1.dart';
+import '../view/screens/customer1.dart';
 
 class SaleController extends GetxController {
   final List<Widget> pages = [

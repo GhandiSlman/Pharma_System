@@ -1,20 +1,20 @@
 import 'package:get/get.dart';
-import 'package:pharma_man/screens/adddebt.dart';
-import 'package:pharma_man/screens/allsuppliers.dart';
-import 'package:pharma_man/screens/auth/checkcode.dart';
-import 'package:pharma_man/screens/auth/forgetpass.dart';
-import 'package:pharma_man/screens/auth/login.dart';
-import 'package:pharma_man/screens/auth/signup.dart';
-import 'package:pharma_man/screens/editsupplier.dart';
-import 'package:pharma_man/screens/home.dart';
-import 'package:pharma_man/screens/main.dart';
-import 'package:pharma_man/screens/postsupplier.dart';
-import 'package:pharma_man/screens/purchase.dart';
-import 'package:pharma_man/screens/sale/addpurchase.dart';
-import 'package:pharma_man/screens/sale/mainsale.dart';
-import 'package:pharma_man/screens/sales.dart';
+import 'package:pharma_man/view/screens/add_debt.dart';
+import 'package:pharma_man/view/screens/all_suppliers.dart';
+import 'package:pharma_man/view/screens/auth/check_code.dart';
+import 'package:pharma_man/view/screens/auth/forget_password.dart';
+import 'package:pharma_man/view/screens/auth/login.dart';
+import 'package:pharma_man/view/screens/auth/signup.dart';
+import 'package:pharma_man/view/screens/edit_supplier.dart';
+import 'package:pharma_man/view/screens/home.dart';
+import 'package:pharma_man/view/screens/main.dart';
+import 'package:pharma_man/view/screens/post_supplier.dart';
+import 'package:pharma_man/view/screens/purchase.dart';
+import 'package:pharma_man/view/screens/add_purchase.dart';
+import 'package:pharma_man/view/screens/main_sale.dart';
+import 'package:pharma_man/view/screens/sales.dart';
 
-import 'middleware/auth_middleware.dart';
+import 'core/middleware/auth_middleware.dart';
 List<GetPage<dynamic>>? routes = [
     GetPage(name: '/', page:() => Login(),middlewares: [MyMiddleWare()]),
     GetPage(name: '/signup', page:() => SignUp()),

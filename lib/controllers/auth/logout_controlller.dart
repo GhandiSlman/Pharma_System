@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharma_man/const/api.dart';
-import 'package:pharma_man/const/routes.dart';
+import 'package:pharma_man/core/const/api.dart';
+import 'package:pharma_man/core/const/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:sizer/sizer.dart';

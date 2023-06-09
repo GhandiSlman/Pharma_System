@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharma_man/const/routes.dart';
+import 'package:pharma_man/core/const/routes.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:pharma_man/services/services.dart';
+import 'package:pharma_man/core/services/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import '../../const/api.dart';
+import '../../core/const/api.dart';
 
 class LoginController extends GetxController {
   late final TextEditingController email;
@@ -62,7 +62,7 @@ class LoginController extends GetxController {
         print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
           Map responseBody = jsonDecode(response.body);
-          myServices.shared.setString('logi', '1');
+          myServices.sh.setString('logi', '1');
 
           isLoading.value = false;
           getToken(responseBody['token']);
@@ -70,10 +70,10 @@ class LoginController extends GetxController {
           
           if (responseBody['user']['role_id']==1) {
             loginAsAdmin();
-            Get.offAllNamed(AppRoute.mainScreen);
+            Get.toNamed(AppRoute.mainScreen);
           } else {
             loginAsUser();
-            Get.offAllNamed(AppRoute.mainScreen);
+            Get.toNamed(AppRoute.mainScreen);
           }
 
           // Get.snackbar('Success', 'Done',

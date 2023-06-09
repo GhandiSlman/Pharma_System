@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pharma_man/controllers/auth/login_controller.dart';
-import 'package:pharma_man/screens/auth/login.dart';
+import 'package:pharma_man/view/screens/auth/login.dart';
 
-import '../const/api.dart';
+import '../core/const/api.dart';
 import '../model/product.dart';
 
 import 'package:http/http.dart' as http;

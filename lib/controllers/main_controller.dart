@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pharma_man/controllers/auth/login_controller.dart';
-import 'package:pharma_man/screens/alarm.dart';
-import 'package:pharma_man/screens/allsuppliers.dart';
-import 'package:pharma_man/screens/getinvoice.dart';
+import 'package:pharma_man/view/screens/alarm.dart';
+import 'package:pharma_man/view/screens/all_suppliers.dart';
+import 'package:pharma_man/view/screens/get_invoice.dart';
 
-import '../screens/debt.dart';
-import '../screens/home.dart';
-import '../screens/sale/mainsale.dart';
+import '../view/screens/debt.dart';
+import '../view/screens/home.dart';
+import '../view/screens/main_sale.dart';
 
 class MainController extends GetxController {
-  LoginController controller = Get.put(LoginController());
+ 
 // RxInt currentIndexNav = 0.obs;
   RxInt currentIndexCarousel = 0.obs;
 // Widget getSelectedWidget({required int index}) {
