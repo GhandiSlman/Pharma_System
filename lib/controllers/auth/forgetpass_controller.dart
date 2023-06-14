@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:pharma_man/const/routes.dart';
+import 'package:pharma_man/core/const/api.dart';
+import 'package:pharma_man/core/const/routes.dart';
+
 import 'package:sizer/sizer.dart';
 
-import '../../const/api.dart';
 
 class ForgetPassController extends GetxController {
   late final TextEditingController email;

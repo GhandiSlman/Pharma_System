@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:pharma_man/const/routes.dart';
+
 import 'package:sizer/sizer.dart';
 
-import '../../const/api.dart';
+
 import 'package:http/http.dart' as http;
+
+import '../../core/const/api.dart';
+import '../../core/const/routes.dart';
 
 class CheckCodeController extends GetxController {
   late final TextEditingController password;

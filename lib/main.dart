@@ -14,8 +14,8 @@ import 'core/const/routes.dart';
 import 'controllers/auth/login_controller.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await initialService();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await initialService();
   runApp(const MyApp());
 }
 

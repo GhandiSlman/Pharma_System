@@ -14,9 +14,9 @@ import 'package:pharma_man/view/screens/add_purchase.dart';
 import 'package:pharma_man/view/screens/main_sale.dart';
 import 'package:pharma_man/view/screens/sales.dart';
 
-import 'core/middleware/auth_middleware.dart';
+
 List<GetPage<dynamic>>? routes = [
-    GetPage(name: '/', page:() => Login(),middlewares: [MyMiddleWare()]),
+    GetPage(name: '/', page:() => Login(),),
     GetPage(name: '/signup', page:() => SignUp()),
     GetPage(name: '/home', page:() => HomePage()),
     GetPage(name: '/forgetpass', page:() => ForgetPass()),

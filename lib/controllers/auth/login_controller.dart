@@ -20,7 +20,7 @@ class LoginController extends GetxController {
   RxBool isLoggedIn = false.obs;
   RxBool isAdmin = false.obs;
   GlobalKey<FormState> formState = GlobalKey<FormState>();
-  MyServices myServices = Get.find();
+  //MyServices myServices = Get.find();
 
   bool isshowpass = true;
   isShowPass() {
@@ -62,7 +62,7 @@ class LoginController extends GetxController {
         print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
           Map responseBody = jsonDecode(response.body);
-          myServices.sh.setString('logi', '1');
+        //  myServices.sh.setString('logi', '1');
 
           isLoading.value = false;
           getToken(responseBody['token']);

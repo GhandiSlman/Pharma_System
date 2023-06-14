@@ -5,16 +5,17 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:http/http.dart' as http;
-import 'package:pharma_man/const/appcolor.dart';
-import 'package:pharma_man/const/routes.dart';
+ 
 import 'package:pharma_man/controllers/auth/login_controller.dart';
-import 'package:pharma_man/screens/allsuppliers.dart';
-import 'package:pharma_man/screens/auth/login.dart';
+import 'package:pharma_man/core/const/api.dart';
+import 'package:pharma_man/core/const/routes.dart';
+
 import 'package:pharma_man/test.dart';
-import 'package:pharma_man/widgets/card_supplier.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import '../const/api.dart';
+
+import '../view/widgets/card_supplier.dart';
 
 class PostSupplierController extends GetxController {
   late final TextEditingController name;
@@ -22,7 +23,7 @@ class PostSupplierController extends GetxController {
   late final TextEditingController phone;
   late final TextEditingController address;
   late final TextEditingController company;
-  late final TextEditingController desc;
+  late final TextEditingController desc; 
   late final int id;
   RxList<CardSup> cards = <CardSup>[].obs;
 
