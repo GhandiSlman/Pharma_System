@@ -1,34 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:pharma_man/core/const/appcolor.dart';
-import 'package:pharma_man/core/const/routes.dart';
-import 'package:pharma_man/view/widgets/custom_floating_button.dart';
-import 'package:pharma_man/view/widgets/custom_text.dart';
+
 import 'package:sizer/sizer.dart';
 
-class GetInvoiceScreen extends StatelessWidget {
-  const GetInvoiceScreen({Key? key}) : super(key: key);
+import '../../controllers/all_purchase_controller.dart';
+import '../../core/const/appcolor.dart';
+import '../../core/const/routes.dart';
+import '../../model/purchase.dart';
+import '../widgets/card_purchase.dart';
+import '../widgets/custom_floating_button.dart';
+import '../widgets/custom_text.dart';
 
+class GetInvoiceScreen extends StatelessWidget {
+  GetInvoiceScreen({ this.purchases,Key? key}) : super(key: key);
+  final AllPurchaseController controller= Get.put(AllPurchaseController());
+  final Purchases? purchases;
+  @override
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.white,
-        floatingActionButton: CustomFloatingButton(
-          icon: Icon(Icons.add),
-          color: AppColor.color1,
-          onPressed: () {
-            Get.toNamed(AppRoute.addpurchase);
-          },
-        ),
-        body: Container(
+      floatingActionButton: CustomFloatingButton(
+        icon: Icon(Icons.add),
+        color: AppColor.color1,
+        onPressed: () {
+          Get.toNamed(AppRoute.addpurchase);
+        },
+      ),
+      body: Container(
           padding: EdgeInsets.all(3.h),
-          child:
-           ListView(children: [
-            Column(children: [
-                CustomText(text: 'Invoices', size: 18.sp, wieght: FontWeight.bold, color: AppColor.color2)
-            ],)
-           ],)
-           ,));
+          child: Column(
+            children: [
+              CustomText(
+                  text: 'Invoices',
+                  size: 18.sp,
+                  wieght: FontWeight.bold,
+                  color: AppColor.color2),
+              CardPurchase(),
+            ]
+          )
+          ),
+      
+    );
   }
 }

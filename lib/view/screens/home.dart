@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharma_man/core/const/appcolor.dart';
-import 'package:pharma_man/core/const/routes.dart';
-import 'package:pharma_man/controllers/auth/login_controller.dart';
+
 import 'package:pharma_man/controllers/drawer_controller.dart';
 import 'package:pharma_man/controllers/home_controller.dart';
-import 'package:pharma_man/view/widgets/card_items.dart';
-import 'package:pharma_man/view/widgets/custom_icon_button.dart';
-import 'package:pharma_man/view/widgets/custom_text.dart';
+
 
 import 'package:sizer/sizer.dart';
 
+import '../../core/const/appcolor.dart';
+import '../../core/const/routes.dart';
+import '../widgets/card_items.dart';
 import '../widgets/carousel_items.dart';
+import '../widgets/custom_icon_button.dart';
+import '../widgets/custom_text.dart';
 
 class HomePage extends StatelessWidget {
   final ProductController controller = Get.put(ProductController());
   DrawController controller2 = Get.put(DrawController());
-  
-  LoginController controller3 = Get.find<LoginController>();
- 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      minimum: EdgeInsets.all(2.sp),
       child: Scaffold(
         key: controller2.key,
         drawer: Drawer(
-            width: 70.w,
+           width: 70.w,
             child: ListView(
               children: [
                 Container(
@@ -39,91 +38,68 @@ class HomePage extends StatelessWidget {
                         color: AppColor.white),
                   ),
                   decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //     colors: [AppColor.color1, AppColor.color2]),
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(5.h)),
-                      color: AppColor.color1),
+                    borderRadius:
+                        BorderRadius.only(bottomRight: Radius.circular(5.h),
+                    topLeft: Radius.circular(5.h)),
+                        color: AppColor.color1
+                  ),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
-                Obx(() {
-                  
-                  if (controller3.isAdmin.value) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Icon(Icons.add),
-                          title: CustomText(
-                              text: 'Add Supplier',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {
-                            Get.toNamed(AppRoute.postSuppliersScreen);
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.supervisor_account_outlined),
-                          title: CustomText(
-                              text: 'All Suppliers',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {
-                            Get.toNamed(AppRoute.allsuppliers);
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.settings_outlined),
-                          title: CustomText(
-                              text: 'Settings',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {},
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Icon(Icons.add),
-                          title: CustomText(
-                              text: 'Add Supplier',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {
-                            Get.toNamed(AppRoute.postSuppliersScreen);
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.supervisor_account_outlined),
-                          title: CustomText(
-                              text: 'All Suppliers',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {
-                            Get.toNamed(AppRoute.allsuppliers);
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.settings_outlined),
-                          title: CustomText(
-                              text: 'Settings',
-                              size: 12.sp,
-                              wieght: FontWeight.bold,
-                              color: AppColor.black),
-                          onTap: () {},
-                        ),
-                      ],
-                    );
-                  }
-                })
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: CustomText(
+                      text: 'Add Supplier',
+                      size: 12.sp,
+                      wieght: FontWeight.bold,
+                      color: AppColor.black),
+                  onTap: () {
+                    Get.toNamed(AppRoute.postSuppliersScreen);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.supervisor_account_outlined),
+                  title: CustomText(
+                      text: 'All Suppliers',
+                      size: 12.sp,
+                      wieght: FontWeight.bold,
+                      color: AppColor.black),
+                  onTap: () {
+                    Get.toNamed(AppRoute.allsuppliers);
+                  },
+                ),
+                 ListTile(
+                  leading: Icon(Icons.add),
+                  title: CustomText(
+                      text: 'Add Employes',
+                      size: 12.sp,
+                      wieght: FontWeight.bold,
+                      color: AppColor.black),
+                  onTap: () {
+                    Get.toNamed(AppRoute.addEmploye);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.supervisor_account_outlined),
+                  title: CustomText(
+                      text: 'All Employes',
+                      size: 12.sp,
+                      wieght: FontWeight.bold,
+                      color: AppColor.black),
+                  onTap: () {
+                    Get.toNamed(AppRoute.allEmployees);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings_outlined),
+                  title: CustomText(
+                      text: 'Settings',
+                      size: 12.sp,
+                      wieght: FontWeight.bold,
+                      color: AppColor.black),
+                  onTap: () {},
+                ),
               ],
             )),
         backgroundColor: AppColor.white,
@@ -140,8 +116,10 @@ class HomePage extends StatelessWidget {
                   color: AppColor.color1,
                   borderRadius: BorderRadius.only(
                     // bottomLeft: Radius.circular(70),
-                    bottomRight: Radius.circular(10.h),
+                    bottomRight: Radius.circular(5.h),
+                    topLeft: Radius.circular(5.h)
                   ),
+              
                 ),
                 child: Column(
                   children: [
@@ -179,13 +157,13 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: -10,
-                right: 30,
-                child: Stack(
-                  children: [],
-                ),
-              )
+              // Positioned(
+              //   bottom: -10,
+              //   right: 30,
+              //   // child: Stack(
+              //   //   children: [],
+              //   // ),
+              // )
             ],
           ),
           const SizedBox(

@@ -14,5 +14,6 @@ class AppRoute {
   static const String addDebt = '/adddebt';
   static const String allsuppliers = '/allsuppliers';
   static const String editSupplier = '/editsupplier';
-  static const String ini = '/';
+  static const String allEmployees = '/allemployees';
+  static const String addEmploye = '/addEmploye';
 }

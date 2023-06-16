@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pharma_man/view/screens/add_debt.dart';
+import 'package:pharma_man/view/screens/add_employee.dart';
+import 'package:pharma_man/view/screens/all_employee.dart';
 import 'package:pharma_man/view/screens/all_suppliers.dart';
 import 'package:pharma_man/view/screens/auth/check_code.dart';
 import 'package:pharma_man/view/screens/auth/forget_password.dart';
@@ -30,4 +32,6 @@ List<GetPage<dynamic>>? routes = [
     GetPage(name: '/adddebt', page:() => AddDebt()),
     GetPage(name: '/allsuppliers', page:() => AllSuppliers()),
     GetPage(name: '/editsupplier', page:() => EditSupplier()),
+    GetPage(name: '/allemployees', page:() => AllEmployees()),
+    GetPage(name: '/addEmploye', page:() => AddEmploye()),
 ];

@@ -5,12 +5,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
+import 'package:pharma_man/controllers/main_controller.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/const/api.dart';
+import '../core/const/routes.dart';
+
 
 class AddPurchaseController extends GetxController {
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
   late final TextEditingController name;
   late final TextEditingController netPrice;
   late final TextEditingController salePrice;
@@ -18,10 +27,11 @@ class AddPurchaseController extends GetxController {
   late final TextEditingController expiryDate;
   late final TextEditingController quantity;
   late final TextEditingController cat;
-  late final TextEditingController res;
-final RxString scanResult = RxString('');
 
-  Future<void> addPurchase(
+  final RxString scanResult = RxString('');
+  RxBool isLoading = false.obs;
+  
+  Future<void> addpurchase(
     String name,
     String netPrice,
     String salePrice,
@@ -29,48 +39,75 @@ final RxString scanResult = RxString('');
     String supplier,
     String expiryDate,
     String quantity,
-    String res,
+    String bar,
   ) async {
-    var response =
-        await http.post(Uri.parse('${Api}add-purchase'), body: <String, String>{
-      'name': name,
-      'net_price': netPrice,
-      'salling_price': salePrice,
-      'category': cat,
-      'supplier': supplier,
-      'expiry_date': expiryDate,
-      'quantity': quantity,
-      'paracode': res,
-    });
-    print(response.statusCode);
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      Map responseBody = jsonDecode(response.body);
-      Get.snackbar('Success', 'Done',
-          padding: const EdgeInsets.all(10),
-          backgroundColor: Colors.green,
-          snackPosition: SnackPosition.TOP);
-    } else {
-      //isLoading.value = false;
-      Get.snackbar('Email or password', 'your information is wrong',
-          padding: EdgeInsets.all(2.h),
-          backgroundColor: Color.fromARGB(255, 245, 113, 103),
-          snackPosition: SnackPosition.BOTTOM);
+    try {
+      var formdata = formState.currentState;
+      if (formdata!.validate()) {
+        SharedPreferences sh = await SharedPreferences.getInstance();
+        String? token = sh.getString('signup');
+
+        var isConnected = await InternetConnectionChecker().hasConnection;
+
+        if (!isConnected) {
+          isLoading.value = true;
+          Get.snackbar(
+            'No internet connection',
+            'Please check your internet connection and try again.',
+            backgroundColor: Color.fromARGB(255, 245, 113, 103),
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        } else {
+          isLoading.value = false;
+        }
+
+        var headers = <String, String>{
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        };
+
+        var response = await http.post(Uri.parse('${Api}add-purchase'),
+            headers: headers,
+            body: <String, String>{
+              'name': name,
+              'net_price': netPrice,
+              'salling_price': salePrice,
+              'category': cat,
+              'supplier': supplier,
+              'expiry_date': expiryDate,
+              'quantity': quantity,
+              'paracode': bar,
+            });
+        print(response.statusCode);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          // ignore: unused_local_variable
+          var responseBody = jsonDecode(response.body);
+          
+          Get.toNamed(AppRoute.mainScreen);
+          isLoading.value = false;
+        } else {
+          print(response.statusCode);
+          isLoading.value = true;
+          Get.snackbar(
+            'Error',
+            'Something went wrong',
+            backgroundColor: Color.fromARGB(255, 245, 113, 103),
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+      }
+    }
+     catch (e) {
+      print(e.toString());
+      Get.snackbar(
+            'Error',
+            'Something went wrong',
+            backgroundColor: Color.fromARGB(255, 245, 113, 103),
+            snackPosition: SnackPosition.BOTTOM,
+          );
     }
   }
 
- Future<void> scanCode() async {
-    try {
-      final result = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666', 
-        'cancel', 
-        true, 
-        ScanMode.BARCODE
-      );
-      scanResult.value = result;
-    } on PlatformException {
-      scanResult.value = 'Failed';
-    }
-  }
   @override
   void onInit() {
     name = TextEditingController();
@@ -80,7 +117,7 @@ final RxString scanResult = RxString('');
     expiryDate = TextEditingController();
     quantity = TextEditingController();
     cat = TextEditingController();
-    res = TextEditingController();
+
     super.onInit();
   }
 }
