@@ -102,7 +102,8 @@ class Login extends StatelessWidget {
                 ),
               ],
             ),
-          ]),
+          ]
+          ),
         ),
       ),
       )

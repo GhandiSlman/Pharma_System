@@ -17,7 +17,6 @@ import 'package:sizer/sizer.dart';
 import '../core/const/api.dart';
 import '../core/const/routes.dart';
 
-
 class AddPurchaseController extends GetxController {
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   late final TextEditingController name;
@@ -30,7 +29,7 @@ class AddPurchaseController extends GetxController {
 
   final RxString scanResult = RxString('');
   RxBool isLoading = false.obs;
-  
+
   Future<void> addpurchase(
     String name,
     String netPrice,
@@ -80,9 +79,7 @@ class AddPurchaseController extends GetxController {
             });
         print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
-          // ignore: unused_local_variable
           var responseBody = jsonDecode(response.body);
-          
           Get.toNamed(AppRoute.mainScreen);
           isLoading.value = false;
         } else {
@@ -96,15 +93,14 @@ class AddPurchaseController extends GetxController {
           );
         }
       }
-    }
-     catch (e) {
+    } catch (e) {
       print(e.toString());
       Get.snackbar(
-            'Error',
-            'Something went wrong',
-            backgroundColor: Color.fromARGB(255, 245, 113, 103),
-            snackPosition: SnackPosition.BOTTOM,
-          );
+        'Error',
+        'Something went wrong',
+        backgroundColor: Color.fromARGB(255, 245, 113, 103),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -117,7 +113,6 @@ class AddPurchaseController extends GetxController {
     expiryDate = TextEditingController();
     quantity = TextEditingController();
     cat = TextEditingController();
-
     super.onInit();
   }
 }

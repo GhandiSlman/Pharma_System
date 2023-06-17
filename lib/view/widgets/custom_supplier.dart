@@ -5,7 +5,6 @@ import 'package:pharma_man/model/suppliers.dart';
 import 'package:pharma_man/view/widgets/custom_text.dart';
 
 import 'package:sizer/sizer.dart';
-
 import '../../controllers/suppliers_controller.dart';
 import '../../core/const/appcolor.dart';
 
@@ -15,8 +14,7 @@ class CustomSuppliers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FutureBuilder(
+    return  FutureBuilder(
           future: controller.getSuppliers(),
           builder: (context, AsyncSnapshot snapshot) {
             Suppliers? data = snapshot.data;
@@ -37,7 +35,7 @@ class CustomSuppliers extends StatelessWidget {
                     itemCount: data!.data.length,
                     itemBuilder: (context, int index) {
                       return Padding(
-                        padding: const EdgeInsets.all(6),
+                        padding:  EdgeInsets.all(1.h),
 
                         child: ElevatedButton(
                           style: ButtonStyle(
@@ -71,7 +69,7 @@ class CustomSuppliers extends StatelessWidget {
                             )),
                           ),
                         ),
-                        //  )
+                      
                       );
                     }),
               );
@@ -81,7 +79,7 @@ class CustomSuppliers extends StatelessWidget {
                 color: AppColor.color1,
               ));
             }
-          }),
+          },
     );
   }
 }

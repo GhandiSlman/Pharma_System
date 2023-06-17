@@ -157,22 +157,14 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              // Positioned(
-              //   bottom: -10,
-              //   right: 30,
-              //   // child: Stack(
-              //   //   children: [],
-              //   // ),
-              // )
+          
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           CarouselSliderItems(),
-          const SizedBox(
-            height: 10,
-          ),
+          
           CardItems(),
         ]),
       ),

@@ -7,10 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../core/const/api.dart';
-
 class SuppliersCotroller extends GetxController {
   RxInt id = 0.obs;
- 
+
   @override
   onInit() {
     super.onInit();
@@ -24,7 +23,8 @@ class SuppliersCotroller extends GetxController {
       print('token${token}');
 
       final url = Uri.parse('${Api}suppliers');
-      print('token${token}');
+      //print('token${token}');
+      print('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgg');
       var response = await http.get(
         url,
         headers: {
@@ -43,17 +43,14 @@ class SuppliersCotroller extends GetxController {
 
         return suppliersFromJson(jsonData);
       }
-    } 
-    catch (e) {
+    } catch (e) {
       print(e.toString());
-       Get.snackbar(
-            'Error',
-            'Something went wrongggggggggggggg',
-            backgroundColor: Color.fromARGB(255, 245, 113, 103),
-            snackPosition: SnackPosition.BOTTOM,
-          );
+      Get.snackbar(
+        'Error',
+        'Something went wrong',
+        backgroundColor: Color.fromARGB(255, 245, 113, 103),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
- }
+  }
 }
-
-

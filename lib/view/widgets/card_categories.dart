@@ -16,8 +16,7 @@ class CardCategories extends StatelessWidget {
   //final Categories? cat;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FutureBuilder(
+    return  FutureBuilder(
           future: controller.getCategories(),
           builder: (context, AsyncSnapshot snapshot) {
             Categories? data = snapshot.data;
@@ -82,7 +81,7 @@ class CardCategories extends StatelessWidget {
                 color: AppColor.color1,
               ));
             }
-          }),
+          }
     );
   }
 }
